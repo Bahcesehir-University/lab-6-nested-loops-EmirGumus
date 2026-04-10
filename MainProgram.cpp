@@ -24,12 +24,13 @@
 using namespace std;
 
 int main() {
-
+    
     // ========================================================================
     //  SECTION 1 — WARM-UP  (5-10 minutes)
     //  Goal: Refresh your memory on basic loops and output.
     // ========================================================================
 
+    
     cout << "===== SECTION 1: WARM-UP =====" << endl;
 
     // -----------------------------------------------------------------------
@@ -44,10 +45,16 @@ int main() {
 
     // TODO: Write a for loop that counts from 5 down to 1
     //       Print each number followed by a space, then "Go!" on a new line.
-
+    
+    for(int i=5; i>0; i--)
+    {
+        cout << i << endl;
+    }
+    
+    cout << "Go!" << endl;
 
     cout << endl;
-
+    
     // -----------------------------------------------------------------------
     // Exercise 1.2: Sum of Numbers
     //   Ask the user for a positive integer N.
@@ -63,10 +70,17 @@ int main() {
 
     // TODO: Use a loop to calculate the sum of 1 + 2 + ... + N
     //       Store the result in a variable called 'sum' and print it.
-
+    
+    int sum = 0;
+    for(int i=1; i<=n; i++)
+    {
+        sum += i;
+    }
+    
+    cout << "Sum = " << sum << endl;
 
     cout << endl;
-
+    
     // ========================================================================
     //  SECTION 2 — CORE CONCEPTS  (10-15 minutes)
     //  Goal: Understand nested loops, break, and continue through
@@ -109,10 +123,21 @@ int main() {
     // TODO: Create nested loops (outer: 4 iterations, inner: 5 iterations).
     //       Use a counter variable to count how many times the inner body runs.
     //       Print the total count.
+    
+    int count = 0;
+    
+    for(int i=0; i<4; i++)
+    {
+        for(int j=0; j<5; j++)
+        {
+            count++;
+        }
+    }
 
+    cout << "Total iterations: " << count << endl;
 
     cout << endl;
-
+    
     // -----------------------------------------------------------------------
     //  CONCEPT B: The 'break' Statement
     //
@@ -138,10 +163,18 @@ int main() {
 
     // TODO: Loop through the 'data' array.
     //       When you find the first negative number, print it and break.
-
+    
+    for(int i=0; i<dataSize; i++)
+    {
+        if(data[i]<0)
+        {
+            cout << "First negative number: " << data[i] << endl;
+            break;
+        }
+    }
 
     cout << endl;
-
+    
     // -----------------------------------------------------------------------
     //  CONCEPT C: The 'continue' Statement
     //
@@ -166,7 +199,15 @@ int main() {
     //       Use 'continue' to skip multiples of 3.
     //       Print the remaining numbers on one line separated by spaces.
 
-
+    for(int i=1; i<=20; i++)
+    {
+        if(i%3==0)
+        {
+            continue;
+        }
+        cout << i << " ";
+    }
+    
     cout << endl << endl;
 
     // ========================================================================
@@ -197,6 +238,15 @@ int main() {
 
     // TODO: Write nested loops to produce the multiplication table above.
 
+    for(int i=1; i<=5; i++)
+    {
+        for(int j=1; j<=5; j++)
+        {
+            cout << i*j << "\t";
+        }
+        
+        cout << endl;
+    }
 
     cout << endl;
 
@@ -217,6 +267,16 @@ int main() {
     int height;
     cout << "Enter triangle height (1-10): ";
     cin >> height;
+    
+    for(int i=1; i<=height; i++)
+    {
+        for(int j=1; j<=i; j++)
+        {
+            cout << "*";
+        }
+        
+        cout << endl;
+    }
 
     // TODO: Use nested loops to print the right triangle pattern.
     //       Outer loop: controls the row (1 to height)
@@ -244,6 +304,7 @@ int main() {
     int rows;
     cout << "Enter number of rows (1-7): ";
     cin >> rows;
+    cout << endl;
 
     // TODO: Use nested loops.
     //       Outer loop: row = 1 to 'rows'
@@ -252,7 +313,17 @@ int main() {
     //         - Accumulate the sum for that row
     //       After inner loop: print "-> Sum = " and the row's sum
 
-
+    for(int row=1; row<=rows; row++)
+    {
+        int sum = 0;
+        for(int col=1; col<=row; col++)
+        {
+            cout << col << " ";
+            sum += col;
+        }
+        cout << "\t" << "Sum = " << sum << endl;
+    }
+    
     cout << endl;
 
     // -----------------------------------------------------------------------
@@ -268,7 +339,8 @@ int main() {
     //     51  62  78  84
     //     90  15  42  68
     // -----------------------------------------------------------------------
-
+    
+    
     cout << "--- 2D Grid Search ---" << endl;
 
     int grid[3][4] = {
@@ -280,6 +352,7 @@ int main() {
     int target;
     cout << "Enter a number to search for: ";
     cin >> target;
+    cout << endl;
 
     // TODO: Use nested loops to search the grid for 'target'.
     //       If found, print "Found <target> at row <r>, col <c>" and stop.
@@ -288,8 +361,32 @@ int main() {
     //   Hint: You will need a boolean flag (e.g., 'found') to track whether
     //         the value was found across both loops, because 'break' only
     //         exits the inner loop.
-
-
+    
+    
+    int row = 3;
+    int col = 4;
+    bool found = false;
+    
+    for(int i=0; i<row; i++)
+    {
+        for(int j=0; j<col; j++)
+        {
+            if(grid[i][j] == target)
+            {
+                found = true;
+                cout << "Found " << target << " at row " << i+1 << ", col " << j+1 << endl;
+                break;
+            }
+        }
+        if(found){
+            break;
+        }
+    }
+    
+    if(found==false){
+        cout << "Not found" << endl;
+    }
+    
     cout << endl;
 
     // -----------------------------------------------------------------------
@@ -314,9 +411,22 @@ int main() {
     //       Accumulate the sum and count of valid scores.
     //       Print the average of valid scores (use double for precision).
 
-
-    cout << endl;
-
+    int sum = 0;
+    int count = 0;
+    
+    for(int i=0; i<scoresSize; i++)
+    {
+        if(scores[i]<50)
+        {
+            continue;
+        }else{
+            count++;
+            sum += scores[i];
+        }
+    }
+    
+    cout << "Expected Average : " << sum/count << endl;
+    
     // -----------------------------------------------------------------------
     // Exercise 3.6: Nested Loop with Break — Prime Checker
     //   Ask the user for a number (>= 2).
@@ -331,25 +441,41 @@ int main() {
     //     Input: 13  -> Output: "13 is prime."
     //     Input: 15  -> Output: "15 is not prime."
     // -----------------------------------------------------------------------
-
+    
     cout << "--- Prime Checker ---" << endl;
 
     int num;
     cout << "Enter a number (>= 2): ";
     cin >> num;
-
+    cout << endl;
+    
     // TODO: Use a loop from 2 to num-1 to check for divisors.
     //       If you find a divisor, set a flag and break.
     //       After the loop, print whether the number is prime or not.
 
-
+    bool prime = true;
+    
+    for(int i=2; i<num ; i++)
+    {
+        if(num%i == 0)
+        {
+            prime = false;
+            cout << num <<" is NOT prime.";
+            break;
+        }
+    }
+    if(prime==true)
+    {
+        cout << num <<" IS prime.";
+    }
+    
     cout << endl;
 
     // ========================================================================
     //  SECTION 4 — CHALLENGE  (10 minutes)
     //  Goal: Apply everything you've learned to harder problems.
     // ========================================================================
-
+    
     cout << "===== SECTION 4: CHALLENGE =====" << endl;
 
     // -----------------------------------------------------------------------
@@ -376,11 +502,41 @@ int main() {
     int diamond;
     cout << "Enter an odd number (3-15): ";
     cin >> diamond;
-
+    cout << endl;
+    
     // TODO: Print the diamond pattern.
     //       You may use two separate loop sections (upper half, lower half)
     //       or a single clever loop — your choice.
 
+    for(int i=1; i<=diamond; i++)
+    {
+        if(i<=(diamond/2)+1)
+        {
+            for(int j=diamond-i; j>=diamond/2; j--)
+            {
+                cout << " ";
+            }
+            
+            for(int k=1; k<=(i*2)-1; k++)
+            {
+                cout << "*";
+            }
+            cout << endl;
+        }else
+        {
+            for(int j=1; j<=diamond/2; j++)
+            {
+                cout << " ";
+            }
+            
+            for(int k=diamond-2; k>0; k--)
+            {
+                cout << "*";
+            }
+            cout << endl;
+        }
+
+    }
 
     cout << endl;
 
