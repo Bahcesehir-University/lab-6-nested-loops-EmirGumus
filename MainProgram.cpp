@@ -411,8 +411,8 @@ int main() {
     //       Accumulate the sum and count of valid scores.
     //       Print the average of valid scores (use double for precision).
 
-    int sum = 0;
-    int count = 0;
+    int sum_ = 0;
+    int count_ = 0;
     
     for(int i=0; i<scoresSize; i++)
     {
@@ -420,12 +420,12 @@ int main() {
         {
             continue;
         }else{
-            count++;
-            sum += scores[i];
+            count_++;
+            sum_ += scores[i];
         }
     }
     
-    cout << "Expected Average : " << sum/count << endl;
+    cout << "Expected Average : " << sum_/count_ << endl;
     
     // -----------------------------------------------------------------------
     // Exercise 3.6: Nested Loop with Break — Prime Checker
@@ -524,12 +524,12 @@ int main() {
             cout << endl;
         }else
         {
-            for(int j=1; j<=diamond/2; j++)
+            for(int j=i; j>diamond/2; j--)
             {
                 cout << " ";
             }
             
-            for(int k=diamond-2; k>0; k--)
+            for(int k=((diamond-i)*2)+1; k>0; k--)
             {
                 cout << "*";
             }
@@ -564,7 +564,23 @@ int main() {
     //       - If wrong, print remaining attempts.
     //       - After the loop, if not successful, print "Account locked."
 
-
+    int try_;
+    int count__=0;
+    for(int i=0; i<3; i++)
+    {
+        cout << "Enter Password" << endl;
+        cin >> try_;
+        if (try_ == correctPassword)
+        {
+            cout << "Access granted!";
+            break;
+        }else if (count__ == 2){
+            cout << "Account locked.";
+        }else{
+            count__++;
+        }
+    }
+    
     cout << endl;
 
     // ========================================================================
